@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Article — Code With Amul</title>
+    <!-- Tailwind + Font Awesome + Inter/Space Grotesk -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Space+Grotesk:wght@500;600;700&display=swap');
+        
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            transition: background-color 0.3s ease, color 0.2s ease;
+        }
+        
+        .logo-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .nav-link {
+            position: relative;
+        }
+        
+        .nav-link:after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -2px;
+            left: 0;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+        
+        .nav-link:hover:after {
+            width: 100%;
+        }
+        
+        /* Article Typography */
+        .article-content h2 {
+            font-size: 1.875rem;
+            font-weight: 600;
+            margin: 2rem 0 1rem 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .article-content h3 {
+            font-size: 1.375rem;
+            font-weight: 600;
+            margin: 1.5rem 0 0.75rem 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+        
+        .article-content p {
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            color: #111827; /* improved contrast for better readability */
+        }
+        
+        .article-content ul, .article-content ol {
+            margin: 1.5rem 0;
+            padding-left: 2rem;
+        }
+        
+        .article-content li {
+            margin-bottom: 0.75rem;
+            line-height: 1.7;
+        }
+        
+        .article-content code {
+            background-color: #f3f4f6;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        
+        .article-content pre {
+            background-color: #1f2937;
+            color: #f3f4f6;
+            padding: 1.5rem;
+            border-radius: 12px;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        .article-content pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        
+        .article-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1.5rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #4b5563;
+        }
+        
+        .article-content img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 12px;
+            margin: 1.5rem 0;
+        }
+        
+        /* Dark mode styles */
+        .dark-mode body {
+            background-color: #0a0c10;
+            color: #eef2ff;
+        }
+        
+        .dark-mode .bg-white {
+            background-color: #111317;
+        }
+        
+        .dark-mode .border-gray-200 {
+            border-color: #2a2f3a;
+        }
+        
+        .dark-mode .article-content p {
+            color: #cbd5e6;
+        }
+        
+        .dark-mode .article-content blockquote {
+            border-left-color: #60a5fa;
+            color: #9ca3af;
+        }
+        
+        .dark-mode .article-content code {
+            background-color: #1e2128;
+            color: #f0f3fa;
+        }
+        
+        .dark-mode input, .dark-mode textarea {
+            background-color: #1a1f2a;
+            color: #eef2ff;
+            border-color: #333a48;
+        }
+        
+        .dark-mode input::placeholder, .dark-mode textarea::placeholder {
+            color: #7e89a3;
+        }
+        
+        .dark-mode button.border-2.border-black {
+            border-color: #eef2ff;
+            color: #eef2ff;
+        }
+        
+        .dark-mode button.border-2.border-black:hover {
+            background-color: #2a2f3c;
+        }
+        
+        .tag {
+            display: inline-block;
+            background-color: #111827; /* darker tag background for contrast */
+            color: #ffffff; /* readable on dark tag background */
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 500;
+            margin-right: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .dark-mode .tag {
+            background-color: #1e2128;
+            color: #cbd5e6;
+        }
+            </style>
+        </head>
+        <body class="bg-white text-black">
+
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <a href="index.html" class="logo-font text-3xl font-semibold tracking-tight hover:opacity-75 transition-opacity"><b>Code With Amul</b></a>
+            </div>
+            
+            <div class="flex items-center gap-x-8 text-sm font-medium">
+                <a href="index.html#hero-top" class="nav-link">Home</a>
+                <a href="index.html#blog-section" class="nav-link">Blog</a>
+                <a href="javascript:void(0);" onclick="alert('✨ Explore topics — coming soon'); return false;" class="nav-link">Topics</a>
+                <a href="javascript:void(0);" onclick="alert('📖 Code With Amul: where code meets craftsmanship'); return false;" class="nav-link">About</a>
+            </div>
+            
+            <div class="flex items-center gap-x-4">
+                <button id="darkModeToggle" class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-2xl transition-all">
+                    <i id="themeIcon" class="fa-regular fa-moon text-xl"></i>
+                </button>
+                <button onclick="toggleSearch()" class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-2xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button onclick="subscribeClick()" class="px-6 py-3 bg-black text-white text-sm font-semibold rounded-3xl hover:bg-gray-800 transition-all">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- ARTICLE HEADER -->
+    <div class="bg-white border-b border-gray-200 py-12 transition-colors duration-300">
+        <div class="max-w-4xl mx-auto px-6">
+            <!-- Tags -->
+            <div class="mb-6" id="articleTags">
+                <span class="tag">RAG</span>
+                <span class="tag">LLM</span>
+                <span class="tag">4 min read</span>
+            </div>
+            
+            <!-- Title -->
+            <h1 id="articleTitle" class="text-5xl lg:text-6xl font-bold logo-font leading-tight mb-6">
+                RAG and LLM: A Simple Guide
+            </h1>
+            
+            <!-- Meta Info -->
+            <div class="flex items-center gap-x-6 text-gray-600">
+                <div class="flex items-center gap-x-2">
+                    <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center font-semibold">PA</div>
+                    <div>
+                        <p class="font-semibold text-black">Prabin Amul</p>
+                        <p class="text-sm">May 7, 2026</p>
+                    </div>
+                </div>
+                <div class="hidden md:block h-8 w-px bg-gray-300"></div>
+                <div class="flex items-center gap-x-2 text-sm">
+                    <i class="fa-regular fa-clock"></i>
+                    <span id="readTime">4 min read</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FEATURED IMAGE -->
+    <div class="bg-gray-900 h-96 flex items-center justify-center border-b border-gray-200">
+        <div class="text-center">
+            <span id="featuredIcon" class="text-white text-8xl font-bold logo-font">TS</span>
+        </div>
+    </div>
+
+    <!-- MAIN ARTICLE CONTENT -->
+    <div class="bg-white py-16 transition-colors duration-300">
+        <div class="max-w-3xl mx-auto px-6">
+            <div id="articleContent" class="article-content mb-12">
+                <!-- Simple RAG + LLM article -->
+                <p class="text-xl font-medium">Large Language Models (LLMs) are powerful AIs that can read and write text. Retrieval-Augmented Generation (RAG) helps LLMs give better, more accurate answers by letting them look up relevant documents first.</p>
+
+                <h2>What is an LLM?</h2>
+                <p>An LLM is a model trained on lots of text. It predicts the next words to write, so it can answer questions, summarize, or write drafts. But sometimes an LLM makes things up or forgets details.</p>
+
+                <h2>What is RAG?</h2>
+                <p>RAG stands for Retrieval-Augmented Generation. Before asking the LLM to answer, a RAG system finds useful documents (retrieval). The LLM then uses those documents to generate an answer (generation). This reduces errors and adds real facts.</p>
+
+                <h3>How it works (simple)</h3>
+                <ol>
+                    <li>Split your documents into chunks and turn each into a numeric vector (embedding).</li>
+                    <li>When a user asks a question, convert the question into a vector and search for the closest chunks.</li>
+                    <li>Send those chunks plus the question to the LLM. The LLM uses that context to answer accurately.</li>
+                </ol>
+
+                <h3>Why use RAG?</h3>
+                <p>RAG keeps answers up to date and reduces hallucinations by grounding responses in real documents. It works well for help desks, knowledge bases, and any app that needs accurate, sourced answers.</p>
+
+                <p><strong>Quick example:</strong> Instead of asking an LLM "How does our refund policy work?" (it might guess), a RAG system fetches the actual refund policy text and asks the LLM to summarize it. The result is clearer and verifiable.</p>
+
+                <p>RAG + LLM is a practical way to make AI answers useful and trustworthy for real users.</p>
+            </div>
+
+            <!-- SHARE BUTTONS -->
+            <div class="flex items-center gap-x-4 py-8 border-t border-gray-200">
+                <span class="text-sm font-medium text-gray-600">Share:</span>
+                <button onclick="shareArticle('twitter')" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all" title="Share on Twitter">
+                    <i class="fab fa-twitter text-blue-400"></i>
+                </button>
+                <button onclick="shareArticle('linkedin')" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all" title="Share on LinkedIn">
+                    <i class="fab fa-linkedin text-blue-600"></i>
+                </button>
+                <button onclick="shareArticle('facebook')" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all" title="Share on Facebook">
+                    <i class="fab fa-facebook text-blue-700"></i>
+                </button>
+                <button onclick="copyLink()" class="w-10 h-10 rounded-full hover:bg-gray-100 flex items-center justify-center transition-all" title="Copy link">
+                    <i class="fa-solid fa-link text-gray-600"></i>
+                </button>
+            </div>
+
+            <!-- AUTHOR BIO -->
+            <div class="bg-gray-100 rounded-3xl p-8 mb-12 transition-colors duration-300">
+                <div class="flex items-start gap-x-6">
+                    <div class="w-16 h-16 bg-gray-400 rounded-full flex-shrink-0 flex items-center justify-center font-bold text-xl text-white">PA</div>
+                    <div>
+                        <h3 class="text-xl font-semibold mb-2">Prabin Amul</h3>
+                        <p class="text-gray-700 mb-4">Full-stack developer with 8+ years of experience building scalable applications. Passionate about TypeScript, React, and developer experience. Founder of Code With Amul.</p>
+                        <div class="flex gap-x-4">
+                            <a href="#" class="text-blue-600 hover:underline text-sm">Twitter</a>
+                            <a href="#" class="text-blue-600 hover:underline text-sm">GitHub</a>
+                            <a href="#" class="text-blue-600 hover:underline text-sm">LinkedIn</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- COMMENTS SECTION -->
+            <div class="border-t border-gray-200 pt-12">
+                <h2 class="text-3xl font-bold logo-font mb-8">Comments</h2>
+                
+                <!-- Comment Form -->
+                <div class="mb-12 p-6 bg-gray-50 rounded-3xl transition-colors duration-300">
+                    <h3 class="font-semibold mb-4">Leave a comment</h3>
+                    <textarea id="commentInput" placeholder="Share your thoughts..." class="w-full p-4 border border-gray-300 rounded-xl focus:border-black focus:outline-none resize-none mb-4" rows="4"></textarea>
+                    <input id="commentName" type="text" placeholder="Your name" class="w-full p-4 border border-gray-300 rounded-xl focus:border-black focus:outline-none mb-4">
+                    <input id="commentEmail" type="email" placeholder="Your email (not published)" class="w-full p-4 border border-gray-300 rounded-xl focus:border-black focus:outline-none mb-6">
+                    <button onclick="submitComment()" class="px-8 py-3 bg-black text-white rounded-xl font-semibold hover:bg-gray-800 transition-all">
+                        Post Comment
+                    </button>
+                </div>
+
+                <!-- Comments List -->
+                <div id="commentsList" class="space-y-6">
+                    <!-- Comments will be dynamically added here -->
+                    <div class="border-b border-gray-200 pb-6">
+                        <div class="flex items-center gap-x-3 mb-3">
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center text-white font-bold text-sm">JD</div>
+                            <div>
+                                <p class="font-semibold">John Dev</p>
+                                <p class="text-xs text-gray-500">2 hours ago</p>
+                            </div>
+                        </div>
+                        <p class="text-gray-700">Fantastic breakdown! These patterns have been game-changers in our codebase.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- RELATED ARTICLES -->
+    <div class="bg-gray-50 py-16 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl font-bold logo-font mb-12">Related Articles</h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <a href="blog.html?id=2" class="bg-white rounded-3xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="h-48 bg-gray-800 flex items-center justify-center">
+                        <i class="fa-solid fa-fire text-6xl text-orange-500"></i>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">Performance</p>
+                        <h3 class="font-semibold text-lg mb-2">How We Reduced Bundle Size by 68%</h3>
+                        <p class="text-gray-600 text-sm">Real optimization techniques used in production.</p>
+                    </div>
+                </a>
+
+                <a href="blog.html?id=3" class="bg-white rounded-3xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="h-48 bg-gray-900 flex items-center justify-center">
+                        <span class="text-6xl font-bold text-white">AI</span>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">AI</p>
+                        <h3 class="font-semibold text-lg mb-2">Building Production RAG Systems</h3>
+                        <p class="text-gray-600 text-sm">Vector search and embeddings in real applications.</p>
+                    </div>
+                </a>
+
+                <a href="index.html#blog-section" class="bg-white rounded-3xl overflow-hidden border border-gray-200 hover:shadow-lg transition-all cursor-pointer">
+                    <div class="h-48 bg-gradient-to-br from-purple-500 to-pink-500 flex items-center justify-center">
+                        <i class="fa-solid fa-sparkles text-6xl text-white"></i>
+                    </div>
+                    <div class="p-6">
+                        <p class="text-xs uppercase tracking-widest text-gray-500 mb-2">Featured</p>
+                        <h3 class="font-semibold text-lg mb-2">Browse All Articles</h3>
+                        <p class="text-gray-600 text-sm">Discover more insights and deep dives.</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEWSLETTER SECTION -->
+    <div class="bg-gray-100 py-16 transition-colors duration-300">
+        <div class="max-w-2xl mx-auto text-center px-6">
+            <h2 class="text-4xl font-semibold mb-4">Get More Articles</h2>
+            <p class="text-gray-600 mb-8">Subscribe to get the latest technical articles delivered weekly.</p>
+            <div class="flex max-w-md mx-auto">
+                <input id="newsletter-email" type="email" class="flex-1 px-6 py-4 border border-gray-300 focus:border-black focus:outline-none rounded-l-3xl text-sm" placeholder="your@email.com">
+                <button onclick="subscribeClick()" class="px-10 bg-black text-white rounded-r-3xl font-semibold hover:bg-gray-800 transition-all">Subscribe</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 py-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
+            © 2026 Code With Amul Blog • Made for developers who want depth.
+        </div>
+    </footer>
+
+        
+
+        // Article data for routing
+        const articlesData = {
+            1: {
+                title: "RAG and LLM: A Simple Guide",
+                tags: ["RAG", "LLM", "4 min"],
+                readTime: "4 min read",
+                icon: "AI",
+                author: "Prabin Amul",
+                date: "May 7, 2026",
+                content: `<p class="text-xl font-medium">Large Language Models (LLMs) are AI systems that read and write text. Retrieval-Augmented Generation (RAG) helps LLMs give more accurate answers by letting them look up real documents first.</p>
+                <h2>What is an LLM?</h2>
+                <p>An LLM is trained on lots of text and can generate answers, summaries, or drafts. LLMs are great at language but sometimes guess facts.</p>
+
+                <h2>What is RAG?</h2>
+                <p>RAG stands for Retrieval-Augmented Generation. It first finds useful documents related to the question, then asks the LLM to use those documents when answering. This makes answers more factual and reliable.</p>
+
+                <h3>How it works (simple)</h3>
+                <ol>
+                    <li>Turn documents into vectors (embeddings).</li>
+                    <li>Find the closest documents to the user's question.</li>
+                    <li>Give those documents + the question to the LLM so it can answer with sources.</li>
+                </ol>
+
+                <p>RAG is useful for support, docs, and any app that needs accurate, source-backed answers.</p>`
+            },
+            2: {
+                title: "How We Reduced Bundle Size by 68%",
+                tags: ["Performance", "12 min"],
+                readTime: "12 min read",
+                icon: "🔥",
+                author: "Prabin Amul",
+                date: "May 4, 2026",
+                content: `<p class="text-xl font-medium">Performance matters. Our main dashboard used to weigh ~2.1MB (gzipped). After systematic analysis and applying <strong>code splitting, tree shaking, and dynamic imports</strong>, we landed at ~670KB — a <strong class="text-green-600">68% reduction</strong>.</p>
+                <h2>Key Strategies</h2>
+                <ul><li>Route-based chunk splitting with React.lazy()</li><li>Removing unused third-party libraries via bundle analysis</li><li>Transforming SVG icons into React components</li><li>Optimizing image formats to WebP</li></ul>
+                <p>We also migrated some utility functions to native browser APIs. Lighthouse score jumped from 68 to 96. The improved UX leads to higher engagement.</p>
+                <pre><code>// Before: 2.1MB
+// After: 670KB reduction
+// Lighthouse: 68 → 96</code></pre>
+                <p>🚀 Full case study includes CI size regression tests to keep bundle lean over time.</p>`
+            },
+            3: {
+                title: "Building Production RAG Systems",
+                tags: ["AI", "9 min"],
+                readTime: "9 min read",
+                icon: "AI",
+                author: "Prabin Amul",
+                date: "May 2, 2026",
+                content: `<p class="text-xl font-medium">Retrieval-Augmented Generation (RAG) is redefining AI apps. This article dives into how we built a <strong>document Q&A pipeline</strong> serving thousands of queries daily with high accuracy.</p>
+                <h2>Vector Search & Embedding Pipeline</h2>
+                <p>We use OpenAI embeddings with pgvector for similarity search. Chunking strategy improved retrieval relevance by 31% compared to naive chunking.</p>
+                <pre><code># Retrieval + prompt injection
+context = vector_store.query(embed_query(query), top_k=5)
+response = llm.generate(prompt_template.format(context=context))</code></pre>
+                <p>Evaluation frameworks (ROUGE, faithfulness) helped us iterate. The final system reduced hallucination and provides citations.</p>
+                <p>🔮 This blueprint can be applied to any codebase or knowledge base.</p>`
+            }
+        };
+
+        // Load article from URL parameter
+        function loadArticle() {
+            const params = new URLSearchParams(window.location.search);
+            const id = params.get('id') || '1';
+            const article = articlesData[id];
+
+            if (article) {
+                document.getElementById('articleTitle').innerText = article.title;
+                document.getElementById('articleContent').innerHTML = article.content;
+                document.getElementById('readTime').innerText = article.readTime;
+                document.title = article.title + ' — Code With Amul';
+                
+                // Update tags
+                const tagsHtml = article.tags.map(tag => `<span class="tag">${tag}</span>`).join('');
+                document.getElementById('articleTags').innerHTML = tagsHtml;
+                
+                // Update featured icon/image
+                const featuredIcon = document.getElementById('featuredIcon');
+                if (article.icon.includes('🔥')) {
+                    featuredIcon.outerHTML = '<i class="fa-solid fa-fire text-8xl text-orange-500"></i>';
+                } else if (article.icon === 'AI') {
+                    featuredIcon.innerText = 'AI';
+                } else {
+                    featuredIcon.innerText = article.icon;
+                }
+            }
+        }
+
+        // Share article
+        function shareArticle(platform) {
+            const title = document.getElementById('articleTitle').innerText;
+            const url = window.location.href;
+            const platforms = {
+                twitter: `https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`,
+                linkedin: `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`,
+                facebook: `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`
+            };
+            if (platforms[platform]) window.open(platforms[platform], '_blank');
+        }
+
+        // Copy link to clipboard
+        function copyLink() {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                alert('✅ Article link copied to clipboard!');
+            });
+        }
+
+        // Submit comment
+        function submitComment() {
+            const comment = document.getElementById('commentInput').value.trim();
+            const name = document.getElementById('commentName').value.trim();
+            const email = document.getElementById('commentEmail').value.trim();
+
+            if (!comment || !name || !email) {
+                alert('📝 Please fill in all fields to post a comment.');
+                return;
+            }
+
+            if (!email.includes('@')) {
+                alert('📧 Please enter a valid email address.');
+                return;
+            }
+
+            const initials = name.split(' ').map(n => n[0]).join('').toUpperCase().slice(0, 2);
+            const colors = ['bg-red-500', 'bg-blue-500', 'bg-green-500', 'bg-purple-500', 'bg-yellow-500', 'bg-pink-500'];
+            const color = colors[Math.floor(Math.random() * colors.length)];
+
+            const commentHtml = `
+                <div class="border-b border-gray-200 pb-6">
+                    <div class="flex items-center gap-x-3 mb-3">
+                        <div class="w-10 h-10 ${color} rounded-full flex items-center justify-center text-white font-bold text-sm">${initials}</div>
+                        <div>
+                            <p class="font-semibold">${name}</p>
+                            <p class="text-xs text-gray-500">just now</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-700">${comment}</p>
+                </div>
+            `;
+
+            document.getElementById('commentsList').insertAdjacentHTML('afterbegin', commentHtml);
+            document.getElementById('commentInput').value = '';
+            document.getElementById('commentName').value = '';
+            document.getElementById('commentEmail').value = '';
+            alert('✅ Comment posted successfully!');
+        }
+
+        // Subscribe
+        function subscribeClick() {
+            const emailInputs = [
+                document.getElementById('email-input'),
+                document.getElementById('newsletter-email')
+            ];
+            const emailInput = emailInputs.find(el => el && el.value);
+
+            if (emailInput && emailInput.value.includes('@') && emailInput.value.includes('.')) {
+                alert(`✅ Subscribed! ${emailInput.value} will receive weekly insights.`);
+                emailInput.value = '';
+            } else {
+                alert('📧 Please enter a valid email address.');
+            }
+        }
+
+        // Toggle search
+        function toggleSearch() {
+            alert('🔍 Search is coming soon — find every article with blazing speed!');
+        }
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initTheme();
+            loadArticle();
+        });
+    </script>
+</body>
+</html>

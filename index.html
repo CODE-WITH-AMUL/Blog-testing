@@ -1,22 +1,300 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
-<html>
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <title>Code With Amul</title>
-        <meta name="description" content="">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="">
-    </head>
-    <body>
-        <!--[if lt IE 7]>
-            <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="#">upgrade your browser</a> to improve your experience.</p>
-        <![endif]-->
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code With Amul Blog</title>
+    <!-- Tailwind + Font Awesome + Inter/Space Grotesk -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="tail-container bg-white text-black">
+    <!-- NAVBAR (sticky + smooth) -->
+    <nav class="bg-white border-b border-gray-200 sticky top-0 z-50 transition-colors duration-300 dark-mode-aware">
+        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-3">
+                <span class="logo-font text-3xl font-semibold tracking-tight"><b>Code With Amul
+                    
+                </b></span>
+            </div>
+            
+            <div class="flex items-center gap-x-8 text-sm font-medium">
+                <a href="#" class="nav-link" onclick="smoothScrollTo('hero-top'); return false;">Home</a>
+                <a href="#" class="nav-link" onclick="smoothScrollTo('blog-section'); return false;">Blog</a>
+                <a href="#" class="nav-link" onclick="alert('✨ Explore topics — coming soon with full taxonomy'); return false;">Topics</a>
+                <a href="#" class="nav-link" onclick="alert('📖 Code With Amul: where code meets craftsmanship'); return false;">About</a>
+            </div>
+            
+            <div class="flex items-center gap-x-4">
+                <!-- Dark/Light Toggle Button (bright mode active by default but toggles) -->
+                <button id="darkModeToggle" class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-2xl transition-all dark-mode-aware">
+                    <i id="themeIcon" class="fa-regular fa-moon text-xl"></i>
+                </button>
+                <button onclick="toggleSearch()" class="w-10 h-10 flex items-center justify-center hover:bg-gray-100 rounded-2xl">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+                <button onclick="subscribeClick()" 
+                        class="px-6 py-3 bg-black text-white text-sm font-semibold rounded-3xl hover:bg-gray-800 transition-all">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION (id anchor for smooth scroll) -->
+    <div id="hero-top" class="bg-white pt-16 pb-20 border-b transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 lg:grid-cols-12 gap-16 items-center">
+            <!-- Left Content -->
+            <div class="lg:col-span-7 reveal-elm">
+                <div class="inline-flex items-center gap-x-2 bg-gray-100 px-5 py-2 rounded-3xl mb-6">
+                    <span class="text-sm font-semibold tracking-widest">TRENDING NOW</span>
+                </div>
+                
+                <h1 class="text-6xl lg:text-7xl leading-none font-bold tracking-tighter logo-font mb-6">
+                    Master Modern<br>Development
+                </h1>
+                
+                <p class="text-3xl text-gray-700 font-light tracking-tight mb-8">
+                    With practical examples and real-world insights
+                </p>
+                
+                <p class="text-lg text-gray-600 max-w-md mb-10">
+                    Deep technical articles on React, TypeScript, Next.js, Python, and full-stack development.
+                </p>
+                
+                <div class="flex items-center gap-x-6">
+                    <button onclick="smoothScrollTo('blog-section')" 
+                            class="px-8 py-4 bg-black text-white rounded-3xl font-semibold flex items-center gap-x-3 hover:bg-gray-800 transition-all">
+                        Browse Articles
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                    
+                    <button onclick="readPost(1)" 
+                            class="px-8 py-4 border-2 border-black rounded-3xl font-medium hover:bg-gray-100 transition-all">
+                        Read Latest
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Code Preview (with smooth reveal) -->
+            <div class="lg:col-span-5 reveal-elm" style="transition-delay: 0.1s;">
+                <div class="code-window bg-gray-950 text-gray-200 rounded-3xl overflow-hidden border border-gray-800 shadow-2xl">
+                    <div class="h-11 bg-gray-900 flex items-center px-4 gap-x-2">
+                        <div class="flex gap-x-1.5">
+                            <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                            <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                        </div>
+                        <div class="flex-1 text-center">
+                            <span class="text-gray-400 text-xs font-mono">example.tsx</span>
+                        </div>
+                    </div>
+                    <div class="p-8 font-mono text-sm leading-relaxed">
+                        <span class="text-blue-400">const</span> <span class="text-sky-400">useCustomHook</span> = () =&gt; &#123;<br>
+                          <span class="text-purple-400">const</span> [state, setState] = useState();<br><br>
+                          useEffect(() =&gt; &#123;<br>
+                            fetchData().then(data =&gt; setState(data));<br>
+                          &#125;, []);<br><br>
+                          <span class="text-purple-400">return</span> state;<br>
+                        &#125;
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BLOG SECTION -->
+    <div id="blog-section" class="max-w-7xl mx-auto px-6 py-20">
+        <div class="reveal-elm">
+            <h2 class="text-4xl font-semibold mb-2">Latest Articles</h2>
+            <p class="text-gray-600 mb-10">Handpicked stories from the Code With Amul team</p>
+        </div>
         
-        <script src="" async defer></script>
-    </body>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Post Cards with full article simulation: now smooth modal + full reading experience (alert replaced by inline full-article simulation) -->
+            <div class="post-card bg-white border border-gray-200 rounded-3xl overflow-hidden cursor-pointer reveal-elm" onclick="openFullArticle(1)">
+                <div class="h-56 bg-gray-900 flex items-center justify-center">
+                    <span class="text-white text-6xl font-bold logo-font">TS</span>
+                </div>
+                <div class="p-8">
+                    <div class="text-xs uppercase tracking-widest text-gray-500 mb-3">TypeScript • 6 min</div>
+                    <h3 class="font-semibold text-xl leading-tight mb-3">Advanced TypeScript Patterns Used at Scale</h3>
+                    <p class="text-gray-600 line-clamp-3">Deep dive into utility types, conditional types, and production patterns.</p>
+                    <div class="mt-6 text-sm text-gray-500">May 6, 2026 • Prabin Amul</div>
+                </div>
+            </div>
+
+            <div class="post-card bg-white border border-gray-200 rounded-3xl overflow-hidden cursor-pointer reveal-elm" onclick="openFullArticle(2)">
+                <div class="h-56 bg-gray-800 flex items-center justify-center">
+                    <i class="fa-solid fa-fire text-6xl text-orange-500"></i>
+                </div>
+                <div class="p-8">
+                    <div class="text-xs uppercase tracking-widest text-gray-500 mb-3">Performance • 12 min</div>
+                    <h3 class="font-semibold text-xl leading-tight mb-3">How We Reduced Bundle Size by 68%</h3>
+                    <p class="text-gray-600 line-clamp-3">Real optimization techniques used in large production apps.</p>
+                    <div class="mt-6 text-sm text-gray-500">May 4, 2026 • Prabin Amul</div>
+                </div>
+            </div>
+
+            <div class="post-card bg-white border border-gray-200 rounded-3xl overflow-hidden cursor-pointer reveal-elm" onclick="openFullArticle(3)">
+                <div class="h-56 bg-gray-900 flex items-center justify-center text-white">
+                    <span class="text-5xl font-bold">AI</span>
+                </div>
+                <div class="p-8">
+                    <div class="text-xs uppercase tracking-widest text-gray-500 mb-3">AI • 9 min</div>
+                    <h3 class="font-semibold text-xl leading-tight mb-3">Building Production RAG Systems</h3>
+                    <p class="text-gray-600 line-clamp-3">Vector search, embeddings, and evaluation in real applications.</p>
+                    <div class="mt-6 text-sm text-gray-500">May 2, 2026 • Prabin Amul</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEWSLETTER SECTION -->
+    <div class="bg-gray-100 py-20 transition-colors duration-300">
+        <div class="max-w-2xl mx-auto text-center px-6 reveal-elm">
+            <h2 class="text-4xl font-semibold mb-4">Stay Updated</h2>
+            <p class="text-gray-600 mb-8">Get the best technical articles delivered every week.</p>
+            <div class="flex max-w-md mx-auto">
+                <input id="email-input" type="email" 
+                       class="flex-1 px-6 py-5 border border-gray-300 focus:border-black outline-none rounded-l-3xl text-sm"
+                       placeholder="your@email.com">
+                <button onclick="subscribeClick()" 
+                        class="px-10 bg-black text-white rounded-r-3xl font-semibold hover:bg-gray-800 transition-all">
+                    Subscribe
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="bg-white border-t border-gray-200 py-12 transition-colors duration-300">
+        <div class="max-w-7xl mx-auto px-6 text-center text-gray-500 text-sm">
+            © 2026 Code With Amul Blog • Made for developers who want depth.
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        // ---- DARK MODE TOGGLE LISTENER (connected to HTML button)
+        window.addEventListener('DOMContentLoaded', () => {
+            const darkModeToggle = document.getElementById('darkModeToggle');
+            if (darkModeToggle) {
+                darkModeToggle.addEventListener('click', toggleDarkMode);
+            }
+        });
+
+        // ---- FULL ARTICLE EXPERIENCE (modal reading with rich content, replaces old alert)
+        const articlesData = {
+            1: {
+                title: "Advanced TypeScript Patterns Used at Scale",
+                content: `<p class="mb-4 text-xl font-medium">TypeScript’s type system is a powerhouse — especially when building large-scale applications. At Code With Amul, we rely on <strong class="text-black dark:text-white">conditional types, template literal types, and mapped type modifiers</strong> to craft robust APIs.</p>
+                <h2 class="text-2xl font-semibold mt-6 mb-3">Conditional types & infer</h2>
+                <p>Using <code class="bg-gray-100 dark:bg-gray-800 px-1.5 py-0.5 rounded">infer</code> within conditional types unlocks incredible flexibility. For example, extracting return types or deep nested properties becomes a breeze. In production, we built a type-safe event bus that reduced runtime errors by 42%.</p>
+                <pre class="bg-gray-950 text-gray-100 p-4 rounded-xl overflow-x-auto text-sm my-5"><code>type ExtractReturnType<T> = T extends (...args: any[]) => infer R ? R : never;</code></pre>
+                <p>We also implement brand nominal typing to distinguish between different IDs, and leverage <strong>recursive types</strong> for nested validation schemas. These patterns scaled across 150+ components without friction.</p>
+                <p class="mt-4">✨ The result: cleaner codebase and more maintainability across teams.</p>`
+            },
+            2: {
+                title: "How We Reduced Bundle Size by 68%",
+                content: `<p class="mb-4 text-xl font-medium">Performance matters. Our main dashboard used to weigh ~2.1MB (gzipped). After systematic analysis and applying <strong>code splitting, tree shaking, and dynamic imports</strong>, we landed at ~670KB — a <span class="font-bold text-green-600">68% reduction</span>.</p>
+                <h2 class="text-2xl font-semibold mt-6 mb-3">Key strategies</h2>
+                <ul class="list-disc pl-6 space-y-2 my-4">
+                    <li>Route-based chunk splitting with React.lazy()</li>
+                    <li>Removing unused third-party libraries via bundle analysis (Webpack Bundle Analyzer)</li>
+                    <li>Transforming SVG icons into React components to avoid icon font bloat</li>
+                    <li>Optimizing image formats to WebP and implementing lazy loading</li>
+                </ul>
+                <p>We also migrated some utility functions to native browser APIs (e.g., replace lodash get with optional chaining). Lighthouse score jumped from 68 to 96. The improved UX leads to higher engagement.</p>
+                <p>🚀 Full case study includes CI size regression tests to keep bundle lean over time.</p>`
+            },
+            3: {
+                title: "Building Production RAG Systems",
+                content: `<p class="mb-4 text-xl font-medium">Retrieval-Augmented Generation (RAG) is redefining AI apps. This article dives into how we built a <strong>document Q&A pipeline</strong> serving thousands of queries daily with high accuracy.</p>
+                <h2 class="text-2xl font-semibold mt-6 mb-3">Vector search & embedding pipeline</h2>
+                <p>We use OpenAI embeddings with pgvector for similarity search. Chunking strategy (overlap + semantic splitting) improved retrieval relevance by 31% compared to naive chunking. Additionally, we implemented a reranking step using cross-encoders.</p>
+                <pre class="bg-gray-950 text-gray-100 p-4 rounded-xl overflow-x-auto text-sm my-5"><code># Pseudo: retrieval + prompt injection
+context = vector_store.query(embed_query(query), top_k=5)
+response = llm.generate(prompt_template.format(context=context, question=query))</code></pre>
+                <p>Evaluation frameworks (ROUGE, faithfulness) helped us iterate. The final system reduced hallucination and provides citations. We also added guardrails to prevent harmful generation.</p>
+                <p>🔮 This blueprint can be applied to any codebase or knowledge base. Stay tuned for the next part about streaming responses.</p>`
+            }
+        };
+        
+        function openFullArticle(id) {
+            // Route to blog.html with article ID
+            window.location.href = `blog.html?id=${id}`;
+        }
+        
+        function readPost(id) {
+            window.location.href = `blog.html?id=${id}`;
+        }
+        
+        // close modal on backdrop click
+        document.getElementById('articleModal')?.addEventListener('click', function(e) {
+            if(e.target === this) closeArticleModal();
+        });
+        
+        // search, subscribe, helpers
+        function toggleSearch() {
+            alert("🔍 Search index is being built — soon you'll find every article with blazing speed.");
+        }
+        
+        function subscribeClick() {
+            const emailInput = document.getElementById('email-input');
+            const email = emailInput.value.trim();
+            if (email && email.includes('@') && email.includes('.')) {
+                alert(`✅ Subscribed! ${email} will receive weekly insights.`);
+                emailInput.value = '';
+            } else {
+                alert("📧 Please enter a valid email address to subscribe.");
+            }
+        }
+        
+        // Full intersection observer for scroll reveal animations (smooth feeling)
+        const revealElements = document.querySelectorAll('.reveal-elm');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target); // once revealed keeps class
+                }
+            });
+        }, { threshold: 0.12, rootMargin: "0px 0px -20px 0px" });
+        
+        revealElements.forEach(el => observer.observe(el));
+        
+        // Also observe cards after loading, plus set initial (if any visible)
+        window.addEventListener('load', () => {
+            initTheme();
+            // manually trigger a small re-check for revealed elements
+            revealElements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                if (rect.top < window.innerHeight - 80) {
+                    el.classList.add('revealed');
+                    observer.unobserve(el);
+                }
+            });
+            // add event listener on theme toggle
+            const toggleBtn = document.getElementById('darkModeToggle');
+            if (toggleBtn) {
+                toggleBtn.addEventListener('click', toggleDarkMode);
+            }
+        });
+        
+        // Expose global functions for inline handlers
+        window.smoothScrollTo = smoothScrollTo;
+        window.toggleSearch = toggleSearch;
+        window.subscribeClick = subscribeClick;
+        window.readPost = openFullArticle;
+        window.openFullArticle = openFullArticle;
+        window.closeArticleModal = closeArticleModal;
+        
+        // also for "Read Latest" hero button: should open first article with modal
+        const originalReadPost = window.readPost;
+        window.showLatestPost = function() { openFullArticle(1); };
+    </script>
+</body>
 </html>

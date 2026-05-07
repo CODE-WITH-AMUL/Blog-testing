@@ -1,0 +1,161 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600&family=Space+Grotesk:wght@500;600;700&display=swap");
+
+/* base smooth scrolling + dark/light dynamic overrides */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Inter", system-ui, sans-serif;
+  transition:
+    background-color 0.3s ease,
+    color 0.2s ease;
+}
+
+.logo-font {
+  font-family: "Space Grotesk", sans-serif;
+}
+
+/* scroll reveal animations (intersection observer) */
+.reveal-elm {
+  opacity: 0;
+  transform: translateY(28px);
+  transition:
+    opacity 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1),
+    transform 0.7s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+  will-change: opacity, transform;
+}
+
+.reveal-elm.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* smooth card hover & nav link effect */
+.post-card {
+  transition: all 0.35s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+}
+
+.post-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 25px 35px -12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-link {
+  position: relative;
+}
+
+.nav-link:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 2px;
+  bottom: -2px;
+  left: 0;
+  background-color: currentColor;
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover:after {
+  width: 100%;
+}
+
+/* dark mode specific overrides (bright mode tail) */
+.dark-mode body {
+  background-color: #0a0c10;
+  color: #eef2ff;
+}
+
+.dark-mode .bg-white {
+  background-color: #111317;
+}
+
+.dark-mode .border-gray-200 {
+  border-color: #2a2f3a;
+}
+
+.dark-mode .text-gray-700,
+.dark-mode .text-gray-600,
+.dark-mode .text-gray-500 {
+  color: #cbd5e6;
+}
+
+.dark-mode .bg-gray-100 {
+  background-color: #1e2128;
+}
+
+.dark-mode .bg-gray-50 {
+  background-color: #171b22;
+}
+
+.dark-mode .post-card {
+  background-color: #13161f;
+  border-color: #2a2f3c;
+}
+
+.dark-mode .post-card .text-gray-600 {
+  color: #b9c3d4;
+}
+
+.dark-mode footer.bg-white {
+  background-color: #111317;
+}
+
+.dark-mode input {
+  background-color: #1a1f2a;
+  color: #eef2ff;
+  border-color: #333a48;
+}
+
+.dark-mode input::placeholder {
+  color: #7e89a3;
+}
+
+.dark-mode .btn-sub-dark {
+  background-color: #f0f3fa;
+  color: #0a0c10;
+}
+
+.dark-mode .btn-sub-dark:hover {
+  background-color: #ffffff;
+}
+
+.dark-mode .bg-gray-900,
+.dark-mode .bg-gray-800 {
+  background-color: #0f111a;
+}
+
+.dark-mode .border-black {
+  border-color: #eef2ff;
+}
+
+.dark-mode button.border-2.border-black {
+  border-color: #eef2ff;
+  color: #eef2ff;
+}
+
+.dark-mode button.border-2.border-black:hover {
+  background-color: #2a2f3c;
+}
+
+.toggle-icon {
+  transition: all 0.2s ease;
+}
+
+/* code window dark mode tune */
+.dark-mode .code-window {
+  background: #0b0e14;
+  border-color: #2c3346;
+}
+
+.dark-mode .code-window .bg-gray-900 {
+  background-color: #0f121c;
+}
+
+/* blog cards line-clamp fallback */
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
